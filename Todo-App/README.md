@@ -18,6 +18,7 @@ Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The appli
 ```
 #### Fontawesome icons
 ```bash
+  npm i @fortawesome/angular-fontawesome
   npm install @fortawesome/free-solid-svg-icons
   npm install @fortawesome/free-regular-svg-icons
   npm install @fortawesome/fontawesome-svg-core
