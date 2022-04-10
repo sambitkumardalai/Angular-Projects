@@ -16,11 +16,11 @@ export class AppComponent implements OnInit {
   ngOnInit(): void {
     this.registerForm = this.formBuilder.group(
       {
-        firstName: ['', Validators.required, Validators.minLength(2)],
+        firstName: ['', [Validators.required, Validators.minLength(2)]],
         lastName: ['', Validators.required],
         email: ['', Validators.required],
         password: ['', Validators.required],
-        confirmPassword: ['', Validators.required],
+        confirmPassword: ['', [Validators.required, Validators.minLength(6)]],
         acceptTandC: [false, Validators.requiredTrue],
       },
       {
@@ -37,5 +37,8 @@ export class AppComponent implements OnInit {
   onReset() {
     this.registerForm.reset();
     this.submitted = false;
+  }
+  get formControlGetter() {
+    return this.registerForm.controls;
   }
 }
