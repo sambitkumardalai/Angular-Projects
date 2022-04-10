@@ -23,3 +23,9 @@ Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The appli
   npm install @fortawesome/free-regular-svg-icons
   npm install @fortawesome/fontawesome-svg-core
 ```
+
+#### Uuid install
+```bash
+  npm i --save @types/uuid
+```
+
