@@ -23,6 +23,14 @@ Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The appli
   npm install @fortawesome/free-regular-svg-icons
   npm install @fortawesome/fontawesome-svg-core
 ```
+#### Toastr install
+```bash
+  npm install bootstrap ngx-toastr
+```
+###### Then in src\styles.css file add this code in top
+```
+  @import "~ngx-toastr/toastr";
+```
 
 #### Uuid install
 ```bash
