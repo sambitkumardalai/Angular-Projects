@@ -18,13 +18,13 @@ export class AppComponent implements OnInit {
       {
         firstName: ['', [Validators.required, Validators.minLength(2)]],
         lastName: ['', Validators.required],
-        email: ['', Validators.required],
-        password: ['', Validators.required],
+        email: ['', [Validators.required, Validators.email]],
+        password: ['', [Validators.required]],
         confirmPassword: ['', [Validators.required, Validators.minLength(6)]],
         acceptTandC: [false, Validators.requiredTrue],
       },
       {
-        Validators: PasswordChecker('pasword', 'confirmPassword'),
+        validators: PasswordChecker('password', 'confirmPassword'),
       }
     );
   }
@@ -39,6 +39,8 @@ export class AppComponent implements OnInit {
     this.submitted = false;
   }
   get formControlGetter() {
+    // console.log(this.registerForm.controls['confirmPassword'].errors);
+
     return this.registerForm.controls;
   }
 }

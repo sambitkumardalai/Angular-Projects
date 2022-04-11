@@ -17,8 +17,13 @@
                 'is-invalid': submitted && formControlGetter['firstName'].errors
               }"
             />
-            <div class="text-warning">
-              <div>First Name is required</div>
+            <div
+              class="text-warning"
+              *ngIf="submitted && formControlGetter['firstName'].errors"
+            >
+              <div *ngIf="formControlGetter['firstName'].errors['required']">
+                First Name is required
+              </div>
             </div>
           </div>
           <div class="form-group col-6">
@@ -29,8 +34,13 @@
               formControlName="lastName"
               [ngClass]="{ 'is-invalid': submitted && formControlGetter[''] }"
             />
-            <div class="text-warning">
-              <div>Last Name is required</div>
+            <div
+              class="text-warning"
+              *ngIf="submitted && formControlGetter['lastName'].errors"
+            >
+              <div *ngIf="formControlGetter['lastName'].errors['required']">
+                Last Name is required
+              </div>
             </div>
           </div>
         </div>
@@ -44,15 +54,25 @@
               'is-invalid': submitted && formControlGetter['email']
             }"
           />
-          <div class="text-warning">
-            <div>Email is required</div>
-            <div>Email must be a valid email address</div>
+          <div
+            class="text-warning"
+            *ngIf="
+              formControlGetter['email'].touched &&
+              formControlGetter['email'].errors
+            "
+          >
+            <div *ngIf="formControlGetter['email'].errors['required']">
+              Email is required
+            </div>
+            <div *ngIf="formControlGetter['email'].errors['email']">
+              Email must be a valid email address
+            </div>
           </div>
         </div>
 
-        <ng-container>
+        <!-- <ng-container>
           <div class="text-danger">Value is required.</div>
-        </ng-container>
+        </ng-container> -->
         <div class="row">
           <div class="form-group col">
             <label>Password</label>
@@ -64,9 +84,19 @@
                 'is-invalid': submitted && formControlGetter['password']
               }"
             />
-            <div class="text-warning">
-              <div>Password is required</div>
-              <div>Password must be at least 6 characters</div>
+            <div
+              class="text-warning"
+              *ngIf="
+                formControlGetter['password'].touched &&
+                formControlGetter['password'].errors
+              "
+            >
+              <div *ngIf="formControlGetter['password'].errors['required']">
+                Password is required
+              </div>
+              <div *ngIf="formControlGetter['password'].errors['minlength']">
+                Password must be at least 6 characters
+              </div>
             </div>
           </div>
           <div class="form-group col">
@@ -79,9 +109,23 @@
                 'is-invalid': submitted && formControlGetter['confirmPassword']
               }"
             />
-            <div class="text-warning">
-              <div>Confirm Password is required</div>
-              <div>Passwords must match</div>
+            <div
+              class="text-warning"
+              *ngIf="
+                formControlGetter['confirmPassword'].touched &&
+                formControlGetter['confirmPassword'].errors
+              "
+            >
+              <div
+                *ngIf="formControlGetter['confirmPassword'].errors['required']"
+              >
+                Confirm Password is required
+              </div>
+              <div
+                *ngIf="formControlGetter['confirmPassword'].errors['mustmatch']"
+              >
+                Passwords must match
+              </div>
             </div>
           </div>
         </div>
@@ -105,8 +149,9 @@
           <button class="btn btn-warning" type="reset" (click)="onReset()">
             Reset
           </button>
-          <p class="text white">Value: {{ registerForm.value | json }}</p>
-          <p class="text white">Value: {{ registerForm.valid | json }}</p>
+          <!-- <p class="text white">Value: {{ registerForm.value | json }}</p>
+          <p class="text white">Value: {{ registerForm.valid | json }}</p> -->
+          <!-- <p class="text white">Value: {{ formControlGetter['confirmPassword'].errors | json }}</p> -->
         </div>
       </form>
     </div>
