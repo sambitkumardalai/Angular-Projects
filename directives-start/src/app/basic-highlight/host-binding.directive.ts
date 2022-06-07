@@ -4,6 +4,7 @@ import { Directive, ElementRef, HostBinding, HostListener, Renderer2 } from "@an
   selector: "[appHostBinding]",
 })
 export class HostBindingDirective {
+  
   @HostBinding("style.backgroundColor") backgroundColor: string = "cyan";
   constructor(private elRef: ElementRef, private renderer: Renderer2) {}
   @HostListener("mouseenter") mouseover(eventData: Event) {
