@@ -30,8 +30,25 @@
             {{ even }}
           </li>
         </div>
-        <p appBasicHighlight>This is a simple  directive</p>
-        <p appBetterHighlight appHostBinding>This is using HostListener and Renderer2 in directive</p>
+        <ng-template [*ngIf]="!onlyOdd">
+          <div>
+            <li
+              class="list-group-item"
+              [ngClass]="{ odd: even % 2 !== 0 }"
+              *ngFor="let even of evenNumbers"
+              [ngStyle]="{
+                backgroundColor: even % 2 !== 0 ? 'yellow' : 'transparent'
+              }"
+            >
+              {{ even }}
+            </li>
+          </div>
+        </ng-template>
+
+        <p appBasicHighlight>This is a simple directive</p>
+        <p appBetterHighlight appHostBinding>
+          This is using HostListener and Renderer2 in directive
+        </p>
         <p appHostBinding>This is using Hostbinding in directive</p>
       </ul>
     </div>
