@@ -37,6 +37,7 @@ export class EditServerComponent implements OnInit, CanComponentDeactivate {
     console.log(this.route.snapshot.fragment);
 
     this.route.fragment.subscribe();
+ 
   }
 
   onUpdateServer() {
