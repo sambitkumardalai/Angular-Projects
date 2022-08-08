@@ -15,12 +15,29 @@ export class HomeComponent implements OnInit {
     const customIntervalObservable = new Observable<number>((observer) => {
       setInterval(() => {
         observer.next(count++);
+
+        if (count === 2) {
+          observer.complete();
+        }
+        if (count > 3) {
+          // through error
+          observer.error(new Error("Count is greater 3!"));
+        }
       }, 1000);
     });
     this.customInternalObservableSubscription =
-      customIntervalObservable.subscribe((data) => {
-        console.log(data);
-      });
+      customIntervalObservable.subscribe(
+        (data) => {
+          console.log(data);
+        },
+        (error) => {
+          console.log(error);
+          alert(error.message);
+        },
+        () => {
+          console.log("Completed");
+        }
+      );
   }
 
   ngOnDestroy() {
