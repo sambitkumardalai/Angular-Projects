@@ -1,5 +1,6 @@
 import { Component, OnInit } from "@angular/core";
 import { Observable, Subscription } from "rxjs";
+import { map } from "rxjs/operators";
 
 @Component({
   selector: "app-home",
@@ -25,8 +26,10 @@ export class HomeComponent implements OnInit {
         }
       }, 1000);
     });
-    this.customInternalObservableSubscription =
-      customIntervalObservable.subscribe(
+
+    this.customInternalObservableSubscription = customIntervalObservable
+      .pipe(map((data) => `Rounded value ${data + 1}`))
+      .subscribe(
         (data) => {
           console.log(data);
         },
