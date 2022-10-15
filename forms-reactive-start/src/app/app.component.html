@@ -2,7 +2,8 @@
   <div class="row">
     <div class="col-xs-12 col-sm-10 col-md-8 col-sm-offset-1 col-md-offset-2">
       <form [formGroup]="signupForm" (ngSubmit)="onSubmit()">
-        <div class="form-group">
+        <div formGroupName="userData">
+            <div class="form-group">
           <label for="username">Username</label>
           <input
             type="text"
@@ -12,8 +13,8 @@
           />
           <span
             *ngIf="
-              !signupForm.get('username').valid &&
-              signupForm.get('username').touched
+              !signupForm.get('userData.username').valid &&
+              signupForm.get('userData.username').touched
             "
           >
             Please enter valid name.
@@ -30,11 +31,12 @@
 
           <span
             *ngIf="
-              !signupForm.get('email').valid && signupForm.get('email').touched
+              !signupForm.get('userData.email').valid && signupForm.get('userData.email').touched
             "
           >
             Please enter valid email.
           </span>
+        </div>
         </div>
         <div class="radio" *ngFor="let gender of genders">
           <label>
