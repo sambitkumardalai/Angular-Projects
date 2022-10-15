@@ -33,12 +33,28 @@ export class AppComponent implements OnInit {
 
     // status changes observable/hook
     this.signupForm.statusChanges.subscribe((value) => console.log(value));
+
+    this.signupForm.setValue({
+      userData: {
+        username: "Ram",
+        email: "ram@test.com",
+      },
+      gender: "male",
+      hobbies: [],
+    });
+    this.signupForm.patchValue({
+      userData: {
+        username: "Hanuman",
+      },
+    });
   }
   onSubmit() {
     console.log(this.signupForm);
     console.log(
       this.signupForm.get("userData.username").errors?.nameIsForbidden
     );
+
+    this.signupForm.reset();
   }
 
   onAddHobby() {
