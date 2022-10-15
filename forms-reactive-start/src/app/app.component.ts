@@ -25,6 +25,9 @@ export class AppComponent implements OnInit {
   }
   onSubmit() {
     console.log(this.signupForm);
+    console.log(
+      this.signupForm.get("userData.username").errors?.nameIsForbidden
+    );
   }
 
   onAddHobby() {
