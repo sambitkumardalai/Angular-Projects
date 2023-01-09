@@ -11,6 +11,13 @@ export class AppComponent {
   defaultQuestion = 'teacher';
   answer = '';
   genders = ['Mail', 'Female'];
+  user = {
+    username: '',
+    email: '',
+    secretQuestion: '',
+    answer: '',
+    gender: '',
+  };
   suggestUserName() {
     const suggestedName = 'Superuser';
     /*     this.signupForm.setValue({
@@ -36,5 +43,12 @@ export class AppComponent {
   // === access ngform any time
   onSubmit() {
     console.log(this.signupForm);
+    this.user.username = this.signupForm.value.userData.username;
+    this.user.email = this.signupForm.value.userData.email;
+    this.user.secretQuestion = this.signupForm.value.secret;
+    this.user.answer = this.signupForm.value.answer;
+    this.user.gender = this.signupForm.value.gender;
+    console.log(this.user);
+    this.signupForm.reset();
   }
 }

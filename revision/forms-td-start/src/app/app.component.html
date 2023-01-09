@@ -15,13 +15,15 @@
               required
             />
           </div>
-          <button class="btn btn-default" type="button"
-          (click)="suggestUserName()"
+          <button
+            class="btn btn-default"
+            type="button"
+            (click)="suggestUserName()"
           >
             Suggest an Username
           </button>
           <div class="form-group">
-            <label for="email" >Mail</label>
+            <label for="email">Mail</label>
             <input
               type="email"
               id="email"
@@ -64,14 +66,21 @@
         <p>Your reply:{{ answer }}</p>
         <div class="radio" *ngFor="let gender of genders">
           <label for="">
-            <input type="radio" name="gender" ngModel [value]="gender">
-            {{gender}}
+            <input type="radio" name="gender" ngModel [value]="gender" />
+            {{ gender }}
           </label>
         </div>
-        <button class="btn btn-primary" type="submit" [disabled]="f.invalid">
+        <button
+          class="btn btn-primary"
+          type="submit"
+          [disabled]="f.invalid"
+          (click)="onSubmit()"
+        >
           Submit
         </button>
       </form>
+      <hr>
+     
     </div>
   </div>
 </div>
