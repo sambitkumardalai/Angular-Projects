@@ -19,7 +19,7 @@
             Suggest an Username
           </button>
           <div class="form-group">
-            <label for="email">Mail</label>
+            <label for="email" >Mail</label>
             <input
               type="email"
               id="email"
@@ -60,6 +60,12 @@
           ></textarea>
         </div>
         <p>Your reply:{{ answer }}</p>
+        <div class="radio" *ngFor="let gender of genders">
+          <label for="">
+            <input type="radio" name="gender" ngModel [value]="gender">
+            {{gender}}
+          </label>
+        </div>
         <button class="btn btn-primary" type="submit" [disabled]="f.invalid">
           Submit
         </button>
