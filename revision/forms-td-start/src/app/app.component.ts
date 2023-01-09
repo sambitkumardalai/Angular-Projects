@@ -13,6 +13,21 @@ export class AppComponent {
   genders = ['Mail', 'Female'];
   suggestUserName() {
     const suggestedName = 'Superuser';
+    /*     this.signupForm.setValue({
+      userData: {
+        username: suggestedName,
+        email: '',
+      },
+      secret: 'pet',
+      questionAnswer: '',
+      gender: 'male',
+    }); */
+
+    this.signupForm.form.patchValue({
+      userData: {
+        username: suggestedName,
+      },
+    });
   }
   // === access ngform only on submit
   // onSubmit(form:NgForm) {
