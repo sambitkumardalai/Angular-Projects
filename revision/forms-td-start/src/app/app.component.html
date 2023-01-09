@@ -28,17 +28,26 @@
               name="email"
               required
               email
+              #email="ngModel"
             />
+            <span class="help-block" *ngIf="!email.valid && email.touched">
+              Please enter a valid email.
+            </span>
           </div>
         </div>
         <div class="form-group">
           <label for="secret">Secret Questions</label>
-          <select id="secret" class="form-control" ngModel name="secret">
+          <select id="secret" class="form-control" ngModel name="secret" required
+          [(ngModel)]="defaultQuestion"
+          >
+            <option value="">Select</option>
             <option value="pet">Your first Pet?</option>
             <option value="teacher">Your first teacher?</option>
           </select>
         </div>
-        <button class="btn btn-primary" type="submit">Submit</button>
+        <button class="btn btn-primary" type="submit"
+        [disabled]="f.invalid"
+        >Submit</button>
       </form>
     </div>
   </div>
