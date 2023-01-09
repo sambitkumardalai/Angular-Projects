@@ -7,8 +7,9 @@ import { NgForm } from '@angular/forms';
   styleUrls: ['./app.component.css'],
 })
 export class AppComponent {
-  @ViewChild('f') signupForm:NgForm;
-  defaultQuestion = "teacher";
+  @ViewChild('f') signupForm: NgForm;
+  defaultQuestion = 'teacher';
+  answer = '';
   suggestUserName() {
     const suggestedName = 'Superuser';
   }
@@ -17,8 +18,7 @@ export class AppComponent {
   //   console.log(form);
   // }
   // === access ngform any time
-    onSubmit() {
+  onSubmit() {
     console.log(this.signupForm);
   }
-  
 }
