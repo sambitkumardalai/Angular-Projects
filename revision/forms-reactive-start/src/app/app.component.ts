@@ -12,7 +12,7 @@ export class AppComponent implements OnInit {
   forbiddenUserNames = ['Chris', 'Anna'];
   signUpForm: FormGroup;
   ngOnInit(): void {
-    this.signUpForm = new FormGroup({
+    this.signUpForm = new FormGroup({fghjop
       userData: new FormGroup({
         username: new FormControl(null, [
           Validators.required,
