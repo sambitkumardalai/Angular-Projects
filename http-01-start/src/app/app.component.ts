@@ -4,7 +4,7 @@ import { HttpClient } from '@angular/common/http';
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
-  styleUrls: ['./app.component.css']
+  styleUrls: ['./app.component.css'],
 })
 export class AppComponent implements OnInit {
   loadedPosts = [];
@@ -15,7 +15,13 @@ export class AppComponent implements OnInit {
 
   onCreatePost(postData: { title: string; content: string }) {
     // Send Http request
-    console.log(postData);
+    this.http.post(
+      `https://ng-complete-guide-30d33-default-rtdb.firebaseio.com/posts.json`,
+      postData
+    ).subscribe(responseData=>{
+      console.log(responseData);
+      
+    })
   }
 
   onFetchPosts() {
