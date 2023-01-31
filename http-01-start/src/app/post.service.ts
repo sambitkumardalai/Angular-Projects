@@ -2,10 +2,12 @@ import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { map } from 'rxjs/operators';
 import { Post } from './post.model';
+import { Subject } from 'rxjs-compat';
 @Injectable({
   providedIn: 'root',
 })
 export class PostService {
+  error = new Subject<string>();
   constructor(private http: HttpClient) {}
 
   createAndStorePost(title: string, content: string) {
@@ -16,9 +18,15 @@ export class PostService {
         `https://ng-complete-guide-30d33-default-rtdb.firebaseio.com/posts.json`,
         postData
       )
-      .subscribe((responseData) => {
-        console.log(responseData);
-      });
+      .subscribe(
+        (responseData) => {
+          console.log(responseData);
+        },
+
+        (error) => {
+          this.error.next(error.message);
+        }
+      );
   }
   fetchPosts() {
     return this.http
