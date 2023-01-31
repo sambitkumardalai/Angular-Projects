@@ -1,9 +1,10 @@
 import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { catchError, map } from 'rxjs/operators';
 import { Post } from './post.model';
 import { Subject } from 'rxjs-compat';
 import { throwError } from 'rxjs';
+
 @Injectable({
   providedIn: 'root',
 })
@@ -32,7 +33,10 @@ export class PostService {
   fetchPosts() {
     return this.http
       .get<{ [key: string]: Post }>(
-        'https://ng-complete-guide-30d33-default-rtdb.firebaseio.com/posts.json'
+        'https://ng-complete-guide-30d33-default-rtdb.firebaseio.com/posts.json',
+        {
+          headers: new HttpHeaders({ 'Custom-header': 'hello' }),
+        }
       )
       .pipe(
         map((responseData) => {
@@ -43,8 +47,8 @@ export class PostService {
             return postArray;
           }
         }),
-        catchError(errorRes=>{
-          return throwError(errorRes)
+        catchError((errorRes) => {
+          return throwError(errorRes);
         })
       );
   }
