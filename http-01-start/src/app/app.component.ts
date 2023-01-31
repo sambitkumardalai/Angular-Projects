@@ -9,7 +9,7 @@ import { Post } from './post.model';
   styleUrls: ['./app.component.css'],
 })
 export class AppComponent implements OnInit {
-  loadedPosts = [];
+  loadedPosts: Post[] = [];
 
   constructor(private http: HttpClient) {}
 
@@ -20,7 +20,7 @@ export class AppComponent implements OnInit {
   onCreatePost(postData: { title: string; content: string }) {
     // Send Http request
     this.http
-      .post<{name:string}>(
+      .post<{ name: string }>(
         `https://ng-complete-guide-30d33-default-rtdb.firebaseio.com/posts.json`,
         postData
       )
@@ -52,6 +52,8 @@ export class AppComponent implements OnInit {
           }
         })
       )
-      .subscribe((posts) => console.log(posts));
+      .subscribe((posts) => {
+        this.loadedPosts = posts;
+      });
   }
 }
