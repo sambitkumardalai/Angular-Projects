@@ -22,14 +22,24 @@ export class AppComponent implements OnInit {
   }
 
   onFetchPosts() {
-    this.postService.fetchPosts().subscribe((posts) => {
-      this.loadedPosts = posts;
-    });
+    this.postService.fetchPosts().subscribe(
+      (posts) => {
+        this.loadedPosts = posts;
+      },
+      (error) => {
+        console.log(error.message);
+      }
+    );
   }
 
   onClearPosts() {
-   this.postService.deletePosts().subscribe(()=>{
-    this.loadedPosts=[];
-   })
+    this.postService.deletePosts().subscribe(
+      () => {
+        this.loadedPosts = [];
+      },
+      (error) => {
+        console.log(error.message);
+      }
+    );
   }
 }
