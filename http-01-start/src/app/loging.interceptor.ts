@@ -10,16 +10,22 @@ import { Observable } from 'rxjs';
 import { tap } from 'rxjs/operators';
 
 @Injectable()
-export class AuthInterceptor implements HttpInterceptor {
+export class LogingInterceptor implements HttpInterceptor {
   constructor() {}
 
   intercept(
     request: HttpRequest<unknown>,
     next: HttpHandler
   ): Observable<HttpEvent<unknown>> {
-    const modifiedRequest = request.clone({
-      headers: request.headers.append('Auth', 'xyz'),
-    });
-    return next.handle(modifiedRequest);
+    console.log('Outgoing request');
+
+    return next.handle(request).pipe(
+      tap((event) => {
+        if (event.type === HttpEventType.Response) {
+          console.log('Incoming response');
+          console.log(event.body);
+        }
+      })
+    );
   }
 }
