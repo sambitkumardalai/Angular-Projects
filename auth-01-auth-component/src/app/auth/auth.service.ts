@@ -15,6 +15,7 @@ interface AuthResponseData {
   providedIn: "root",
 })
 export class AuthService {
+  registered:boolean = false;
   constructor(private http: HttpClient) {}
   signUp(email: string, password: string) {
     return this.http
@@ -40,5 +41,16 @@ export class AuthService {
           return throwError(errorMessage);
         })
       );
+  }
+
+  login(email: string, password: string) {
+    return this.http.post(
+      "https://identitytoolkit.googleapis.com/v1/accounts:signInWithPassword?key=AIzaSyCazmyKjs4zLYBjLJRJy0YYmchOKp_P1kg",
+      {
+        email,
+        password,
+        returnSecureToken: true,
+      }
+    );
   }
 }
