@@ -44,7 +44,7 @@ export class AuthService {
 
   login(email: string, password: string) {
     return this.http
-      .post(
+      .post<AuthResponseData>(
         "https://identitytoolkit.googleapis.com/v1/accounts:signInWithPassword?key=AIzaSyCazmyKjs4zLYBjLJRJy0YYmchOKp_P1kg",
         {
           email,
@@ -52,7 +52,17 @@ export class AuthService {
           returnSecureToken: true,
         }
       )
-      .pipe(catchError(this.handleError));
+      .pipe(
+        catchError(this.handleError),
+        tap((resData) => {
+          this.handleAuthentication(
+            resData.email,
+            resData.localId,
+            resData.idToken,
+            +resData.expiresIn
+          );
+        })
+      );
   }
   private handleError(errorRes: HttpErrorResponse) {
     let errorMessage = "An unknown error occured.";
