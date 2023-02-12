@@ -21,7 +21,7 @@ export class AuthService {
   user = new BehaviorSubject<User>(null);
   token: string = null;
 
-  constructor(private http: HttpClient, private router:Router) {}
+  constructor(private http: HttpClient, private router: Router) {}
   signUp(email: string, password: string) {
     return this.http
       .post<AuthResponseData>(
@@ -95,9 +95,32 @@ export class AuthService {
     const expiresDate = new Date(new Date().getTime() + expiresIn * 1000);
     const user = new User(email, userId, token, expiresDate);
     this.user.next(user);
+    console.log(user,"=======");
+    // localStorage.setItem("userData", JSON.stringify(user));
   }
   logout() {
     this.user.next(null);
     this.router.navigate(["/auth"]);
+  }
+  autoLogin() {
+    const userData: {
+      email: string;
+      id: string;
+      _token: string;
+      _tokenExpirationDate: Date;
+    } = JSON.parse(localStorage.getItem("userData"));
+    
+    if (!userData) {
+      return;
+    }
+    const loadedUser = new User(
+      userData.email,
+      userData.id,
+      userData._token,
+      new Date(userData._tokenExpirationDate)
+    );
+    if (loadedUser.token) {
+      this.user.next(loadedUser);
+    }
   }
 }
